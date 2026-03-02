@@ -14,16 +14,16 @@ public enum OrderStatus {
         this.code = code;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
     public static OrderStatus valueOf(Integer code) {
-        for (OrderStatus value: OrderStatus.values()) {
+        for (OrderStatus value : OrderStatus.values()) {
             if (value.getCode().equals(code)) {
                 return value;
             }
         }
         throw new IllegalArgumentException("Invalid OrderStatus code");
+    }
+
+    public Integer getCode() {
+        return code;
     }
 }

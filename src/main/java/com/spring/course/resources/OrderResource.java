@@ -2,7 +2,6 @@ package com.spring.course.resources;
 
 import com.spring.course.entities.Order;
 import com.spring.course.services.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,16 +14,19 @@ import java.util.List;
 @RequestMapping(value = "/order")
 public class OrderResource {
 
-    @Autowired
-    private OrderService service;
+    private final OrderService orderService;
+
+    public OrderResource(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Order>> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
+        return ResponseEntity.ok().body(orderService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Order> findById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(service.findById(id));
+        return ResponseEntity.ok().body(orderService.findById(id));
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
@@ -24,7 +24,8 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
-    public User() {}
+    public User() {
+    }
 
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
