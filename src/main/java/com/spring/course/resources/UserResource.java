@@ -2,11 +2,9 @@ package com.spring.course.resources;
 
 import com.spring.course.entities.User;
 import com.spring.course.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,21 @@ public class UserResource {
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<User> save(@RequestBody User user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
+        return ResponseEntity.ok().body(userService.update(id, user));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
